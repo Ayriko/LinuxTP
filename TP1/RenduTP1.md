@@ -421,7 +421,7 @@ Le service semble accessible depuis le web, et depuis l'autre machine avec un cu
 
 #### B. Modification de l'unité
 
-Préparation de l'environnement :
+**Préparation de l'environnement :**
 ```bash
 [toto@node1 ~]$ sudo useradd web -m -s /bin/sh -u 3000
 [toto@node1 meow]$ ls -al oui
@@ -435,5 +435,52 @@ drwxr-xr-x. 3 root root 18 Nov 15 01:10 ..
 -rw-r--r--. 1 web  root  0 Nov 15 01:10 oui
 ```
 
-Modification de l'unité de web service :  
--> soucis avec le WorkingDirectory
+**Modification de l'unité de web service :**  
+
+On ajoute les deux lignes suivantes au fichier webservice :
+```bash
+User=web
+WorkingDirectory=/var/www/meow/
+```
+
+Il faut penser à redémarrer le service :
+```bash
+[toto@node1 www]$ sudo systemctl stop web
+Warning: The unit file, source configuration file or drop-ins of web.service changed on disk. Run 'systemctl daemon-reload' to reload units.
+[toto@node1 www]$ sudo systemctl daemon-reload
+[toto@node1 www]$ sudo systemctl start web
+[toto@node1 www]$ sudo systemctl status web
+● web.service - Very simple web service
+     Loaded: loaded (/etc/systemd/system/web.service; enabled; vendor preset: disabled)
+     Active: active (running) since Tue 2022-11-15 02:00:12 CET; 8s ago
+   Main PID: 1538 (python3)
+      Tasks: 1 (limit: 5908)
+     Memory: 9.0M
+        CPU: 140ms
+     CGroup: /system.slice/web.service
+             └─1538 /usr/bin/python3 -m http.server 8888
+
+Nov 15 02:00:12 node1.tp1.b2 systemd[1]: Started Very simple web service.
+```
+
+Vérification avec curl depuis l'autre machine :
+```bash
+[rocky@node2 ~]$ curl 10.101.1.11:8888
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Directory listing for /</title>
+</head>
+<body>
+<h1>Directory listing for /</h1>
+<hr>
+<ul>
+<li><a href="oui">oui</a></li>
+</ul>
+<hr>
+</body>
+</html>
+```
+
+On constate qu'on se situe bien dans le dossier 'meow'.
