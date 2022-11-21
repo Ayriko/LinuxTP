@@ -95,3 +95,15 @@ UNLOCK TABLES;
 **La réplication est désormais active**
 
 On peut vérifier avec `SELECT * FROM oc_filecache;` par exemple. Si on ajoute des images sur nextcloud on pourra les y retrouver.
+
+## 5/ Bonus
+
+Le premier a été fait lors de la création de l'utilisateur Replication sur le master, après le '@' on précise l'IP au lieu de laisser le '%'.  
+Seule une connexion provenant de cette IP peut utiliser cet utilisateur.
+
+Voilà ce que ça donne si on connecte depuis ailleurs : 
+```bash
+[rocky@web ~]$ mysql -u replication -h 10.102.1.12 -p
+Enter password:
+ERROR 1698 (28000): Access denied for user 'replication'@'10.102.1.11'
+```
