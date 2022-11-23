@@ -2,14 +2,14 @@
 
 ## 1/ Mise en place d'une nouvelle machine Rocky Linux Slave (nommée ici db2_rep.tp3.linux)  
 Dans le même réseau hôte que le serveur web et la première db.  
-IP -> 10.102.1.13  
-edit ifcfg-enp0s8  
-reload NetworkManager  
-changement hostname -> sudo hostnamectl set-hostname  
-reboot  
-Echange clé ssh  
-dnf update  
-désactiver selinux  
+Checklist :  
+    - IP -> 10.102.1.13  -> edit ifcfg-enp0s8  
+    - reload NetworkManager  
+    - Changement hostname -> sudo hostnamectl set-hostname  
+    - Reboot  
+    - Echange clé ssh  
+    - dnf update  
+    - désactiver selinux
 
 ## 2/ Configuration de mariaDB sur la machine Master (déjà existante)
 
