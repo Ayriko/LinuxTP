@@ -225,3 +225,6 @@ compose-compendium-1  | 128049 |   ret
 ```
 
 Le service est accessible depuis `10.104.1.11:8080`
+
+[Dockerfile de l'app](app/Dockerfile)  
+[docker-compose de l'app](app/docker-compose.yml)
