@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  bot:
+    image: avrae
+    build:
+      context: .
+      args:
+        DBOT_ARGS: test
+        ENVIRONMENT: development
+    env_file:
+      - ./docker/env
+    environment:
+      DBOT_ARGS: test
+      ENVIRONMENT: development

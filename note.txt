@@ -1,0 +1,36 @@
+pb storage
+
+The downloaded packages were saved in cache until the next successful transaction.
+You can remove cached packages by executing 'dnf clean packages'.
+Error: Transaction test error:
+  installing package netdata-1.37.0.24.nightly-1.el9.x86_64 needs 87MB more space on the / filesystem
+
+Error Summary
+-------------
+Disk Requirements:
+   At least 87MB more space needed on the / filesystem.
+
+ FAILED
+
+ WARNING  Failed to install Netdata package.
+
+
+
+
+resol storage
+ajout via vbox
+lsblk pour voir l'état actuel
+sudo pvcreate /dev/sdb pour physical
+sudo vgs pour voir la partition virtuel et son nom (changer lvmlocal.conf au besoin, uncheck = "0")
+sudo vgextend rl /dev/sdb
+sudo vgs et sudo lvs pour suivre état
+sudo lvdisplay
+sudo lvextend -l +100%FREE /dev/rl/root
+sudo fsck pour identifier le resize à faire
+sudo xfs_growfs /dev/rl/root
+CEST GOOD
+du -h avrae --max-depth=1 | sort 
+pour voir le contenu d'un dossier par exemple
+
+docker image ls
+docker image prune
