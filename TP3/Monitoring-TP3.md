@@ -7,7 +7,7 @@ Sur la machine que vous souhaitez surveiller :
 ```bash
 sudo dnf install epel-release -y
 sudo dnf install wget -y
-sudo wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh -y
+sudo wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh
 //répondre yes à chaque demande
 sudo systemctl start netdata
 sudo systemctl enable netdata
